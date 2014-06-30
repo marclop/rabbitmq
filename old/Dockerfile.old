@@ -1,0 +1,23 @@
+# USE UBUNTU
+FROM ubuntu:trusty
+
+MAINTAINER Marc Lopez Rubio <marc5.12@outlook.com>
+
+# INSTALL RABBITMQ
+RUN apt-get -qq update && apt-get install -qq -y rabbitmq-server
+
+# ENABLE MANAGEMENT INTERFACE
+RUN rabbitmq-plugins enable rabbitmq_management
+
+#COPY CONFIG FILE
+RUN mkdir -p /etc/rabbitmq
+ADD rabbitmq.config /etc/rabbitmq/rabbitmq.config
+
+# EXPOSE RABBITMQ PORT
+EXPOSE 5672
+
+# EXPOSE MANAGEMENT UI PORT
+EXPOSE 15672
+
+# SET THE CONTAINER ENTRYPOINT TO THE RABBITMQ EXECUTABLE
+ENTRYPOINT /usr/sbin/rabbitmq-server
