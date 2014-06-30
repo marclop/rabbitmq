@@ -28,8 +28,8 @@ ADD rabbitmq.sh /etc/service/rabbitmq/run
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install SSH key
-ADD ubuntu_key.pub /tmp/ubuntu_key.pub
-RUN cat /tmp/ubuntu_key.pub >> /root/.ssh/authorized_keys && rm -f /tmp/ubuntu_key.pub && chmod 700 /root/.ssh && chmod 600 /root/.ssh/authorized_keys
+ADD key.pub /tmp/key.pub
+RUN cat /tmp/key.pub >> /root/.ssh/authorized_keys && rm -f /tmp/key.pub && chmod 700 /root/.ssh && chmod 600 /root/.ssh/authorized_keys
 
 # EXPOSE RABBITMQ PORT
 EXPOSE 5672 15672
